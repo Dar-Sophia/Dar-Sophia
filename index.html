@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>صوفيا</title>
+    <meta name="description" content="Sofia Natural: منتجات عناية طبيعية للبشرة والشعر والجسم، مصنوعة بحب وتوصيل لباب البيت في مصر.">
+    <meta name="theme-color" content="#9C2A5E">
+    <link rel="icon" href="images/sofia.jpg">
+    <link href="https://fonts.googleapis.com/css2?family=Almarai:wght@400;700&family=Readex+Pro:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css?v=47">
+</head>
+<body>
+
+    <div class="announcement-bar"><div class="container"><span>شحن لجميع المحافظات</span><span>الدفع عند الاستلام</span><span>استبدال خلال 14 يوماً</span></div></div>
+
+    <header class="main-header">
+        <div class="container header-container header-3">
+            
+            <div class="menu-wrap">
+                <button type="button" class="menu-btn" id="menuBtn" aria-label="القائمة" aria-expanded="false" aria-controls="menuDropdown">
+                    <span></span><span></span><span></span>
+                </button>
+                <nav class="menu-dropdown" id="menuDropdown">
+                    <a href="index.html" class="active">الرئيسية</a>
+                    <a href="#products">المنتجات</a>
+                    <a href="#contact">تواصل معنا</a>
+                </nav>
+            </div>
+            <div class="logo"><a href="index.html">صوفيا <span>Natural</span></a></div>
+            <div class="header-actions">
+                <div class="header-search-container">
+                    <button type="button" id="searchIconBtn" class="cart-icon-btn" title="بحث" aria-label="بحث"><i class="fa-solid fa-magnifying-glass"></i></button>
+                    <input type="text" id="searchInput" class="search-input" placeholder="ابحثي عن منتج..." aria-label="بحث عن منتج">
+                </div>
+                <button type="button" id="darkModeToggle" class="cart-icon-btn" title="تغيير المظهر" aria-label="تغيير المظهر"><i class="fa-solid fa-moon"></i></button>
+                <a href="checkout.html" class="cart-icon-btn" title="سلة التسوق" aria-label="سلة التسوق">
+                    <i class="fa-solid fa-bag-shopping"></i><span id="cartCount" class="cart-badge">0</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero-section">
+        <div class="container hero-content">
+            <div>
+                <h1>عناية طبيعية، ونتيجتها بتبان</h1>
+                <p>منتجات للبشرة والشعر والجسم بمكونات واضحة وتركيبات لطيفة، مصنوعة بحب وبتوصلك لحد باب البيت.</p>
+                <div class="hero-btns">
+                    <a href="#products" class="btn btn-primary">تسوّقي الآن</a>
+                    <a href="https://wa.me/" data-wa target="_blank" rel="noopener" class="btn btn-ghost"><i class="fa-brands fa-whatsapp"></i> اسألينا على واتساب</a>
+                </div>
+            </div>
+            <div class="hero-art" aria-hidden="true">
+                <i class="bottle b1"></i><i class="bottle b2"></i><i class="bottle b3"></i>
+                <img src="images/hero.jpg" alt="" onerror="this.remove()">
+                <div class="hero-chip"><i class="fa-solid fa-leaf"></i> مكونات طبيعية 100%</div>
+            </div>
+        </div>
+        <div class="container strip">
+            <div class="pf-features">
+                <div class="pf-item"><span class="pf-icon"><i class="fa-solid fa-leaf"></i></span><div><h4>طبيعي 100%</h4><p>مكونات واضحة ولطيفة</p></div></div>
+                <div class="pf-item"><span class="pf-icon"><i class="fa-solid fa-truck-fast"></i></span><div><h4>توصيل لباب البيت</h4><p>لكل المحافظات</p></div></div>
+                <div class="pf-item"><span class="pf-icon"><i class="fa-solid fa-hand-holding-dollar"></i></span><div><h4>الدفع عند الاستلام</h4><p>افحصي طلبك ثم ادفعي</p></div></div>
+                <div class="pf-item"><span class="pf-icon"><i class="fa-brands fa-whatsapp"></i></span><div><h4>اطلبي بسهولة</h4><p>أكدي على واتساب</p></div></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cats-section">
+        <div class="container">
+            <div class="section-title"><h2>تسوّقي حسب القسم</h2><p>ابدئي من اللي بتحتاجيه دلوقتي</p></div>
+            <div class="cat-tiles">
+                <a href="#products" data-go="skin" class="cat-tile t-skin" style="--img:url('images/logos/skin.jpg')"><h3>البشرة</h3><span>تسوّقي القسم <i class="fa-solid fa-arrow-left"></i></span></a>
+                <a href="#products" data-go="hair" class="cat-tile t-hair" style="--img:url('images/logos/hair.jpg')"><h3>الشعر</h3><span>تسوّقي القسم <i class="fa-solid fa-arrow-left"></i></span></a>
+                <a href="#products" data-go="body" class="cat-tile t-body" style="--img:url('images/logos/body.jpg')"><h3>الجسم</h3><span>تسوّقي القسم <i class="fa-solid fa-arrow-left"></i></span></a>
+            </div>
+        </div>
+    </section>
+
+    <section id="products" class="products-section">
+        <div class="container">
+            <div class="section-head">
+                <div class="section-title"><h2>منتجاتنا</h2></div>
+                <div class="category-boxes-container" id="categoryBoxes">
+                    <button type="button" class="big-cat-box active" data-category="all"><i class="fa-solid fa-border-all"></i><h3>الكل</h3></button>
+                    <button type="button" class="big-cat-box" data-category="skin"><i class="fa-solid fa-spa"></i><h3>البشرة</h3></button>
+                    <button type="button" class="big-cat-box" data-category="hair"><i class="fa-solid fa-seedling"></i><h3>الشعر</h3></button>
+                    <button type="button" class="big-cat-box" data-category="body"><i class="fa-solid fa-hand-holding-heart"></i><h3>الجسم</h3></button>
+                </div>
+            </div>
+            <div class="products-grid" id="productsGrid"></div>
+            <p class="no-results" id="noResults" hidden>لا توجد منتجات مطابقة لبحثك.</p>
+        </div>
+    </section>
+
+    <section class="why">
+        <div class="container">
+            <h2>عناية بسيطة، بمكونات تعرفيها وتثقي فيها</h2>
+            <div class="why-list">
+                <div><i class="fa-solid fa-flask"></i><div><h4>مكونات واضحة</h4><p>كل منتج مكتوب عليه مكوناته وطريقة استخدامه.</p></div></div>
+                <div><i class="fa-solid fa-heart"></i><div><h4>مصنوعة بحب</h4><p>تركيبات لطيفة بنختارها بعناية لبشرتك وشعرك.</p></div></div>
+                <div><i class="fa-solid fa-headset"></i><div><h4>مساعدة في الاختيار</h4><p>كلمينا ونرشّحلك المنتج المناسب لنوع بشرتك.</p></div></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta">
+        <div class="container">
+            <h2>محتارة تختاري؟</h2>
+            <p>كلمينا على واتساب ونساعدك تبني روتينك خطوة بخطوة.</p>
+            <a href="https://wa.me/" data-wa target="_blank" rel="noopener" class="btn btn-wa-big"><i class="fa-brands fa-whatsapp"></i> تواصلي معنا</a>
+        </div>
+    </section>
+
+    <footer class="main-footer" id="contact">
+        <div class="container footer-grid">
+            <div class="footer-col">
+                <h3>Sofia Natural</h3>
+                <p>وجهتك لمنتجات العناية الطبيعية المستوحاة من سحر الطبيعة لنشر الجمال والثقة.</p>
+                <div class="social-icons">
+                    <a href="#" aria-label="فيس بوك"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="#" aria-label="انستجرام"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="https://wa.me/" data-wa target="_blank" rel="noopener" aria-label="واتساب"><i class="fa-brands fa-whatsapp"></i></a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h4>روابط سريعة</h4>
+                <ul>
+                    <li><a href="index.html">الرئيسية</a></li>
+                    <li><a href="#products">المنتجات</a></li>
+                    <li><a href="checkout.html">سلة التسوق</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>تواصل معنا</h4>
+                <p><a href="https://wa.me/" data-wa target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp"></i> كلمينا على واتساب</a></p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>جميع الحقوق محفوظة 2026 Sofia Natural Products</p>
+            <span>تم التطوير بواسطه [Mohammed soudi]</span>
+        </div>
+    </footer>
+
+    <div id="toast" class="toast" role="status"></div>
+    <script src="products-data.js?v=45"></script>
+    <script src="script.js?v=45"></script>
+    <script>
+        document.querySelectorAll('[data-go]').forEach(a => a.addEventListener('click', () => {
+            const tab = document.querySelector('.big-cat-box[data-category="' + a.dataset.go + '"]');
+            if (tab) tab.click();
+        }));
+    </script>
+    <script>
+        const menuBtn = document.getElementById('menuBtn');
+        const menuDropdown = document.getElementById('menuDropdown');
+        function closeMenu() {
+            menuDropdown.classList.remove('show');
+            menuBtn.classList.remove('open');
+            menuBtn.setAttribute('aria-expanded', 'false');
+        }
+        menuBtn.addEventListener('click', e => {
+            e.stopPropagation();
+            const open = menuDropdown.classList.toggle('show');
+            menuBtn.classList.toggle('open', open);
+            menuBtn.setAttribute('aria-expanded', String(open));
+        });
+        document.addEventListener('click', e => { if (!menuDropdown.contains(e.target)) closeMenu(); });
+        document.addEventListener('keydown', e => { if (e.key === 'Escape') closeMenu(); });
+        menuDropdown.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
+    </script>
+</body>
+</html>

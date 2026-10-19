@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>السلة وإتمام الطلب | Sofia Natural</title>
+    <link href="https://fonts.googleapis.com/css2?family=Almarai:wght@400;700&family=Readex+Pro:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css?v=47">
+</head>
+<body>
+
+    <header class="main-header">
+        <div class="container header-container">
+            <div class="logo"><a href="index.html">صوفيا <span>Natural</span></a></div>
+            <div class="header-actions">
+                <button type="button" id="darkModeToggle" class="cart-icon-btn" title="تغيير المظهر" aria-label="تغيير المظهر"><i class="fa-solid fa-moon"></i></button>
+                <a href="index.html#products" class="btn-details"><i class="fa-solid fa-arrow-right"></i> متابعة التسوق</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="container" style="padding:48px 24px 88px;">
+        <div class="co-title"><h1>سلة التسوق</h1><span id="itemsCount"></span></div>
+
+        <div class="co-layout">
+            <div>
+                <div class="co-card">
+                    <div id="cartItemsContainer"></div>
+                </div>
+
+                <div class="co-card">
+                    <h2>بيانات التوصيل</h2>
+                    <form id="checkoutForm" class="co-form" onsubmit="submitOrder(event)">
+                        <div class="co-field"><label for="clientName">الاسم الكامل</label><input type="text" id="clientName" required autocomplete="name" placeholder="اكتبي اسمك الثلاثي"></div>
+                        <div class="co-field"><label for="clientPhone">رقم الهاتف (واتساب)</label><input type="tel" id="clientPhone" required autocomplete="tel" placeholder="010xxxxxxxx"></div>
+                        <div class="co-field full"><label for="clientCity">المحافظة / المدينة</label><input type="text" id="clientCity" required placeholder="مثال: القاهرة، الجيزة..."></div>
+                        <div class="co-field full"><label for="clientAddress">العنوان بالتفصيل</label><textarea id="clientAddress" required rows="3" placeholder="الشارع، رقم العقار، الدور..."></textarea></div>
+                    </form>
+                </div>
+            </div>
+
+            <aside class="co-card co-summary">
+                <h2>ملخص الطلب</h2>
+                <div class="co-row"><span>مجموع المنتجات</span><span id="cartSubtotal">0 ج.م</span></div>
+                <div class="co-row"><span>الشحن</span><span id="cartShipping">0 ج.م</span></div>
+                <div class="co-row total"><span>الإجمالي</span><span id="cartTotalPrice">0 ج.م</span></div>
+                <button type="submit" form="checkoutForm" class="btn btn-wa-big"><i class="fa-brands fa-whatsapp"></i> تأكيد الطلب عبر واتساب</button>
+                <div class="co-note"><i class="fa-solid fa-circle-info"></i><span>هيتفتح واتساب برسالة جاهزة فيها طلبك. الدفع عند الاستلام.</span></div>
+            </aside>
+        </div>
+    </main>
+
+    <div id="toast" class="toast" role="status"></div>
+    <script src="products-data.js?v=45"></script>
+    <script src="script.js?v=45"></script>
+    <script>
+        function renderCheckoutCart() {
+            const container = document.getElementById('cartItemsContainer');
+            const subtotal = cartSubtotal();
+            const shipping = cart.length ? SHIPPING : 0;
+            const count = cart.reduce((s, i) => s + i.quantity, 0);
+
+            container.innerHTML = cart.length ? cart.map(item => `
+                <div class="co-item">
+                    <img src="${escapeHtml(item.image)}" alt="">
+                    <div class="co-item-info">
+                        <h4>${escapeHtml(item.name)}</h4>
+                        <span class="co-unit">${item.price} ج.م للقطعة</span>
+                    </div>
+                    <div class="qty-box">
+                        <button type="button" data-qty="${item.id}" data-d="1" aria-label="زيادة">+</button>
+                        <span>${item.quantity}</span>
+                        <button type="button" data-qty="${item.id}" data-d="-1" aria-label="نقصان">−</button>
+                    </div>
+                    <strong class="co-line">${item.price * item.quantity} ج.م</strong>
+                    <button type="button" class="co-remove" data-remove="${item.id}" aria-label="حذف"><i class="fa-solid fa-xmark"></i></button>
+                </div>`).join('')
+                : '<div class="co-empty"><i class="fa-solid fa-bag-shopping"></i><h3>سلتك فاضية</h3><p>ابدئي بإضافة منتج من المتجر.</p><a href="index.html#products" class="btn btn-primary">تسوّقي الآن</a></div>';
+
+            document.getElementById('itemsCount').textContent = count ? `(${count} منتج)` : '';
+            document.getElementById('cartSubtotal').textContent = subtotal + ' ج.م';
+            document.getElementById('cartShipping').textContent = shipping + ' ج.م';
+            document.getElementById('cartTotalPrice').textContent = (subtotal + shipping) + ' ج.م';
+        }
+
+        document.getElementById('cartItemsContainer').addEventListener('click', e => {
+            const q = e.target.closest('[data-qty]'), r = e.target.closest('[data-remove]');
+            if (q) changeCartQty(q.dataset.qty, +q.dataset.d);
+            else if (r) removeFromCart(r.dataset.remove);
+            else return;
+            renderCheckoutCart();
+        });
+
+        function submitOrder(e) {
+            e.preventDefault();
+            if (!cart.length) { showToast('سلة التسوق فارغة!'); return; }
+
+            const val = id => document.getElementById(id).value.trim();
+            const phone = val('clientPhone').replace(/[\s-]/g, '');
+            if (!/^(\+?20|0)?1[0125]\d{8}$/.test(phone)) { showToast('رقم الهاتف غير صحيح'); document.getElementById('clientPhone').focus(); return; }
+
+            const subtotal = cartSubtotal();
+            let text = `*طلب جديد من متجر Sofia Natural* 🌿\n\n`;
+            text += `👤 *الاسم:* ${val('clientName')}\n📞 *الهاتف:* ${phone}\n🏙️ *المحافظة:* ${val('clientCity')}\n📍 *العنوان:* ${val('clientAddress')}\n\n🛍️ *المنتجات المطلوبة:*\n`;
+            cart.forEach(i => { text += `- ${i.name} (الكمية: ${i.quantity}) - ${i.price * i.quantity} ج.م\n`; });
+            text += `\n🛒 *مجموع المنتجات:* ${subtotal} ج.م\n🚚 *الشحن:* ${SHIPPING} ج.م\n💰 *الإجمالي الكلي:* ${subtotal + SHIPPING} ج.م`;
+
+            window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`, '_blank', 'noopener');
+        }
+
+        document.addEventListener('DOMContentLoaded', renderCheckoutCart);
+    </script>
+</body>
+</html>
