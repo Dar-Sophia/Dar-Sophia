@@ -1,6 +1,34 @@
 /* Sofia Natural — تصميم متجر عناية بناتي: وردي، روز، لافندر وخوخي */
-:root{--primary:#9C2A5E;--primary-light:#E0558F;--on-primary:#FFFFFF;--text-color:#3B1F2E;--bg-light:#FFF5F8;--white:#fff;--gray:#8A6577;--border-color:#F6D6E3;--tint:#FDE8F0;--sage:#FAD3E3;--blush:#E9D8F7;--wa:#12804A;--ease:cubic-bezier(.2,.7,.2,1)}
-body.dark-mode{--primary:#FFC4DC;--primary-light:#F58BB7;--on-primary:#2B0F1F;--text-color:#FBEAF2;--bg-light:#1E1119;--white:#2A1822;--gray:#CBA5B7;--border-color:#4A2A3C;--tint:#35202D;--sage:#5A2D45;--blush:#46305A;--wa:#5FD08F}
+:root{
+  --primary:#c5a059;          /* اللون الذهبي الفاخر الرئيسي */
+  --primary-light:#e2c98a;    /* ذهبي فاتح للإضاءة والتمرير */
+  --on-primary:#FFFFFF;       /* لون النص فوق الأزرار الذهبية */
+  --text-color:#2c2522;       /* لون نص دافئ وراقي */
+  --bg-light:#faf8f5;         /* خلفية كريمية هادئة وفخمة */
+  --white:#fff;
+  --gray:#7a726b;             /* رمادي دافئ متناسق مع الذهبي */
+  --border-color:#e8e1d5;     /* حدود ناعمة متناسقة */
+  --tint:#f4eee1;             /* خلفيات خفيفة متناسقة */
+  --sage:#e8e1d5;
+  --blush:#f0ebd8;
+  --wa:#12804A;
+  --ease:cubic-bezier(.2,.7,.2,1)
+}
+
+body.dark-mode{
+  --primary:#e2c98a;
+  --primary-light:#f4eee1;
+  --on-primary:#1a1714;
+  --text-color:#f5f2eb;
+  --bg-light:#161412;
+  --white:#221f1b;
+  --gray:#a8a095;
+  --border-color:#3a352e;
+  --tint:#26221d;
+  --sage:#3a352e;
+  --blush:#2f2a24;
+  --wa:#5FD08F
+}
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth;scroll-padding-top:84px}
 body{font-family:'Almarai',Tahoma,sans-serif;background:var(--bg-light);color:var(--text-color);direction:rtl;line-height:1.75;overflow-x:clip;-webkit-font-smoothing:antialiased}
@@ -54,24 +82,12 @@ body.dark-mode .btn-wa-big{color:#0C1512}
 .hero-content p{margin:22px 0 34px;max-width:44ch;color:var(--gray);font-size:1.12rem}
 .hero-btns{display:flex;flex-wrap:wrap;gap:12px}
 .hero-art{position:relative;aspect-ratio:4/5;max-height:600px;width:100%;border-radius:999px 999px 28px 28px;background:radial-gradient(circle at 28% 18%,var(--blush),transparent 56%),linear-gradient(165deg,var(--sage),var(--tint));display:flex;align-items:flex-end;justify-content:center;gap:5%;padding-bottom:13%}
-.bottle{position:relative;border-radius:16px 16px 12px 12px;background:linear-gradient(90deg,rgba(255,255,255,.3),transparent 38%),var(--c);box-shadow:0 24px 30px -18px rgba(0,0,0,.35)}
-.bottle::before{content:"";position:absolute;top:-8%;left:50%;transform:translateX(-50%);width:38%;height:9%;background:var(--c);filter:brightness(.78);border-radius:5px 5px 0 0}
-.bottle::after{content:"";position:absolute;left:14%;right:14%;top:46%;height:30%;background:rgba(255,255,255,.9);border-radius:3px}
-.b1{--c:var(--primary-light);width:19%;height:34%}
-.b2{--c:var(--primary);width:23%;height:46%}
-.b3{--c:#F4B6C9;width:17%;height:26%}
 .hero-chip{position:absolute;top:20px;left:50%;transform:translateX(-50%);z-index:2;white-space:nowrap;background:var(--white);border:1px solid var(--border-color);border-radius:999px;padding:9px 20px;font-size:.9rem;display:flex;align-items:center;gap:8px;box-shadow:0 10px 26px rgba(0,0,0,.12)}
 .hero-chip i{color:var(--primary-light)}
 .hero-art{overflow:hidden}
 .hero-art>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:inherit}
 
 /* شريط المزايا */
-.pf-features{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
-.strip{border-block:1px solid var(--border-color);padding:22px 0;margin-top:32px}
-.pf-item{display:flex;align-items:center;gap:14px}
-.pf-icon{width:44px;height:44px;border-radius:50%;background:var(--tint);color:var(--primary);display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.pf-item h4{font-weight:500;font-size:.98rem;line-height:1.4}
-.pf-item p{color:var(--gray);font-size:.85rem;line-height:1.5}
 
 /* عناوين الأقسام */
 .section-title h2{font-size:clamp(1.7rem,3.4vw,2.4rem);font-weight:500;line-height:1.3}
@@ -187,7 +203,6 @@ body.dark-mode .btn-wa-big{color:#0C1512}
  .hero-section{padding-top:32px}
  .hero-content,.product-page,.why .container,.footer-grid{grid-template-columns:1fr;gap:36px}
  .hero-art{max-height:420px;aspect-ratio:1/1}
- .pf-features{grid-template-columns:1fr 1fr}
  .cat-tiles{grid-template-columns:1fr}
  .cat-tile{aspect-ratio:16/9}
  .product-card.is-featured{grid-column:auto;flex-direction:column}
@@ -197,7 +212,7 @@ body.dark-mode .btn-wa-big{color:#0C1512}
  .products-grid{grid-template-columns:repeat(2,1fr);gap:28px 14px}
  .cats-section,.products-section,.why,.cta{padding-block:56px}
 }
-@media (max-width:480px){.pf-features{grid-template-columns:1fr}.announcement-bar .container{gap:14px;font-size:.78rem}}
+@media (max-width:480px){.announcement-bar .container{gap:14px;font-size:.78rem}}
 @media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
 
 /* ===== صفحة السلة ===== */
@@ -248,3 +263,91 @@ body.dark-mode .btn-wa-big{color:#0C1512}
 .hero-section{background:linear-gradient(160deg,#FFE4EE,#FFF5F8 55%,#F1E3FB)!important}
 body.dark-mode .hero-section{background:linear-gradient(160deg,#2E1625,#1E1119 60%,#26172F)!important}
 .product-card:hover .product-img{box-shadow:0 14px 32px -14px rgba(224,85,143,.45)}
+
+
+/* ===== بوكسات المميزات (4 كروت) ===== */
+.strip{padding:0;margin-top:0;position:relative;z-index:2}
+.pf-features{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;padding:28px 0 8px}
+.pf-item{display:flex;flex-direction:column;align-items:center;text-align:center;gap:12px;background:var(--white);border:1px solid var(--border-color);border-radius:22px;padding:26px 16px 22px;box-shadow:0 8px 24px rgba(156,42,94,.07);position:relative;overflow:hidden;transition:transform .3s var(--ease),box-shadow .3s var(--ease),border-color .3s}
+.pf-item::before{content:"";position:absolute;inset:0 0 auto 0;height:3px;background:linear-gradient(90deg,var(--primary),var(--primary-light));transform:scaleX(0);transition:transform .35s var(--ease)}
+.pf-item:hover{transform:translateY(-6px);box-shadow:0 18px 38px rgba(156,42,94,.16);border-color:var(--primary-light)}
+.pf-item:hover::before{transform:scaleX(1)}
+.pf-icon{width:58px;height:58px;font-size:1.3rem;border-radius:18px;background:linear-gradient(135deg,var(--tint),var(--sage));color:var(--primary);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background .3s,color .3s,transform .3s var(--ease)}
+.pf-item:hover .pf-icon{background:var(--primary);color:var(--on-primary);transform:rotate(-6deg) scale(1.06)}
+.pf-item h4{font-weight:700;font-size:1rem;line-height:1.4}
+.pf-item p{color:var(--gray);font-size:.84rem;line-height:1.5}
+body.dark-mode .pf-item{box-shadow:0 8px 24px rgba(0,0,0,.35)}
+
+/* ===== كروت المنتجات ===== */
+.product-card{transition:transform .3s var(--ease),box-shadow .3s var(--ease)}
+.product-card:hover{transform:translateY(-6px)}
+.product-img{overflow:hidden}
+.product-img img{transition:transform .5s var(--ease)}
+.product-card:hover .product-img img{transform:scale(1.06)}
+
+/* ===== ظهور ناعم عند التمرير ===== */
+.reveal{opacity:0;translate:0 22px;transition:opacity .6s var(--ease),translate .6s var(--ease),transform .3s var(--ease),box-shadow .3s var(--ease),border-color .3s,background .3s}
+.reveal.in{opacity:1;translate:0 0}
+
+/* ===== الموبايل: الصورة فوق الكلام + المميزات 2×2 ===== */
+@media (max-width:900px){
+  .hero-art{order:-1;aspect-ratio:5/4;max-height:340px}
+  .pf-features{grid-template-columns:repeat(2,1fr);gap:12px;padding:22px 0 4px}
+}
+@media (max-width:480px){
+  .pf-features{gap:10px}
+  .pf-item{padding:20px 10px 16px;border-radius:18px}
+  .pf-icon{width:48px;height:48px;font-size:1.1rem;border-radius:15px}
+  .pf-item h4{font-size:.9rem}
+  .pf-item p{font-size:.76rem}
+}
+@media (prefers-reduced-motion:reduce){.reveal{opacity:1;translate:none}}
+
+
+/* ===== مكان صورة الهيرو (حطي صورتك في images/hero.jpg) ===== */
+.hero-art{box-shadow:0 30px 60px -28px rgba(156,42,94,.45);border:6px solid var(--white)}
+.hero-art::before{content:"\f03e";font-family:"Font Awesome 6 Free";font-weight:900;position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:3rem;color:var(--primary);opacity:.18}
+
+/* ===== قسم ليه صوفيا (احترافي) ===== */
+.why{position:relative;overflow:hidden;background:linear-gradient(135deg,var(--primary),var(--primary-light));padding:96px 0}
+.why::before,.why::after{content:"";position:absolute;border-radius:50%;background:color-mix(in srgb,var(--on-primary) 8%,transparent);pointer-events:none}
+.why::before{width:380px;height:380px;top:-140px;left:-120px}
+.why::after{width:260px;height:260px;bottom:-110px;right:-80px}
+.why .container{position:relative;z-index:1;gap:56px;align-items:center}
+.why-head .eyebrow{display:inline-block;padding:6px 16px;border-radius:999px;font-size:.85rem;font-weight:700;border:1px solid color-mix(in srgb,var(--on-primary) 35%,transparent);background:color-mix(in srgb,var(--on-primary) 10%,transparent);margin-bottom:18px}
+.why-head p{margin-top:16px;opacity:.85;max-width:42ch;font-size:1.02rem}
+.why-list{display:flex;flex-direction:column;gap:16px}
+.why-list>div,.why-list>div:first-child{position:relative;align-items:center;gap:18px;padding:20px 22px;border:1px solid color-mix(in srgb,var(--on-primary) 22%,transparent);border-radius:20px;background:color-mix(in srgb,var(--on-primary) 10%,transparent);backdrop-filter:blur(6px);overflow:hidden}
+.why-list>div:hover{transform:translateY(-4px);background:color-mix(in srgb,var(--on-primary) 16%,transparent)}
+.why-ico{flex-shrink:0;width:54px;height:54px;border-radius:16px;display:flex;align-items:center;justify-content:center;background:var(--on-primary);color:var(--primary);font-size:1.25rem;box-shadow:0 10px 22px -10px rgba(0,0,0,.4)}
+.why-list .why-ico i{margin:0;font-size:1.25rem}
+.why-list h4{font-weight:700;margin-bottom:2px}
+.why-num{position:absolute;left:18px;top:50%;transform:translateY(-50%);font-family:'Readex Pro',sans-serif;font-size:2.4rem;font-weight:600;opacity:.14;line-height:1}
+@media (max-width:900px){
+  .why{padding:60px 0}
+  .why .container{gap:28px}
+  .why-list>div{padding:16px}
+  .why-ico{width:46px;height:46px;font-size:1.1rem}
+}
+
+
+/* ===== هوية البراند: اللوجو + الهيرو الدائري ===== */
+.logo a{display:inline-flex;align-items:center;gap:10px}
+.logo-img{width:42px;height:42px;border-radius:50%;object-fit:cover;box-shadow:0 0 0 2px var(--white),0 0 0 3px var(--primary-light)}
+.logo .logo-text{font-size:1.6rem;font-weight:500;color:var(--primary);margin:0;letter-spacing:.02em}
+.footer-logo{width:72px;height:72px;border-radius:50%;margin-bottom:12px;box-shadow:0 0 0 3px rgba(255,255,255,.25)}
+
+.hero-art{aspect-ratio:1/1;max-height:560px;width:100%;margin-inline:auto;border-radius:50%;padding:0;overflow:visible;border:0;box-shadow:none;background:none}
+.hero-art::before{display:none}
+.hero-art>img{border-radius:50%;box-shadow:0 30px 70px -28px rgba(156,42,94,.55),0 0 0 8px var(--white),0 0 0 9px var(--border-color)}
+.hero-chip{top:auto;bottom:6%;left:50%}
+@media (max-width:900px){
+  .hero-art{aspect-ratio:1/1;max-height:none;width:min(78vw,340px)}
+}
+@media (max-width:480px){
+  .logo .logo-text{font-size:1.3rem}
+  .logo-img{width:36px;height:36px}
+}
+/* ===== الثيم الذهبي الفاخر للخلفيات ===== */
+.hero-section{background:linear-gradient(160deg,#fcf8f2,#faf8f5 55%,#f2ebd9)!important}
+body.dark-mode .hero-section{background:linear-gradient(160deg,#1f1c18,#161412 60%,#26221d)!important}

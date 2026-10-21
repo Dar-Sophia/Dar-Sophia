@@ -196,9 +196,71 @@ function initWaLinks() {
     document.querySelectorAll('a[data-wa]').forEach(a => { a.href = `https://wa.me/${WHATSAPP_NUMBER}`; });
 }
 
+// ---------- ظهور العناصر بحركة ناعمة عند التمرير ----------
+function initReveal() {
+    const els = document.querySelectorAll('.pf-item,.cat-tile,.why-list > div,.section-title');
+    if (!('IntersectionObserver' in window)) return;
+    const io = new IntersectionObserver(entries => entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+    }), { threshold: .15 });
+    els.forEach(el => { el.classList.add('reveal'); io.observe(el); });
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     initWaLinks();
     initTheme();
     updateCartCount();
     initStorePage();
+    initReveal();
 });
+// كود واحد شامل لإضافة وتفعيل الصور المتعددة للمنتجات تلقائياً
+(function() {
+    // 1. إضافة تنسيقات CSS تلقائياً للصفحة
+    const style = document.createElement('style');
+    style.innerHTML = `
+        .pp-image { display: flex; flex-direction: column; gap: 12px; }
+        .pp-thumbnails { display: flex; gap: 10px; overflow-x: auto; padding-bottom: 4px; }
+        .thumb-img { width: 70px; height: 70px; object-fit: cover; border-radius: 8px; cursor: pointer; border: 2px solid #ddd; transition: all 0.2s ease; }
+        .thumb-img:hover, .thumb-img.active { border-color: #000; transform: scale(1.05); }
+    `;
+    document.head.appendChild(style);
+
+    // 2. تفعيل عرض الصور المصغرة والتبديل بينها
+    window.addEventListener('DOMContentLoaded', () => {
+        if (typeof product !== 'undefined' && product) {
+            const im = document.getElementById('ppImg');
+            if (!im) return;
+            
+            // إنشاء حاوية الصور المصغرة تلقائياً إذا لم تكن موجودة
+            let thumbContainer = document.getElementById('ppThumbnails');
+            if (!thumbContainer) {
+                thumbContainer = document.createElement('div');
+                thumbContainer.id = 'ppThumbnails';
+                thumbContainer.className = 'pp-thumbnails';
+                im.parentNode.appendChild(thumbContainer);
+            }
+            thumbContainer.innerHTML = '';
+
+            // جلب الصور (سواء مصفوفة images أو صورة مفردة image)
+            const productImages = product.images && product.images.length > 0 ? product.images : [product.image];
+            im.src = productImages[0];
+
+            // إضافة الصور المصغرة إذا كانت أكثر من صورة
+            if (productImages.length > 1) {
+                productImages.forEach((imgSrc, index) => {
+                    const thumb = document.createElement('img');
+                    thumb.src = imgSrc;
+                    thumb.className = index === 0 ? 'thumb-img active' : 'thumb-img';
+                    
+                    thumb.addEventListener('click', () => {
+                        im.src = imgSrc;
+                        document.querySelectorAll('.thumb-img').forEach(t => t.classList.remove('active'));
+                        thumb.classList.add('active');
+                    });
+                    
+                    thumbContainer.appendChild(thumb);
+                });
+            }
+        }
+    });
+})();

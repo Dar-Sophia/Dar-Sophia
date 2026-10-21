@@ -3,13 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>صوفيا</title>
-    <meta name="description" content="Sofia Natural: منتجات عناية طبيعية للبشرة والشعر والجسم، مصنوعة بحب وتوصيل لباب البيت في مصر.">
+    <title>دار صوفيا</title>
+    <meta name="description" content="Sofia Natural: منتجات عناية طبيعية للبشرة والشعر والتجميل، مصنوعة بحب وتوصيل لباب البيت في مصر.">
     <meta name="theme-color" content="#9C2A5E">
     <link rel="icon" href="images/sofia.jpg">
+    <meta property="og:title" content="دار صوفيا | عناية طبيعية">
+    <meta property="og:description" content="منتجات عناية طبيعية للبشرة والشعر والتجميل، والدفع عند الاستلام.">
+    <meta property="og:image" content="images/hero.jpg">
+    <meta property="og:type" content="website">
     <link href="https://fonts.googleapis.com/css2?family=Almarai:wght@400;700&family=Readex+Pro:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="style.css?v=47">
+    <link rel="stylesheet" href="style.css?v=51">
 </head>
 <body>
 
@@ -28,7 +32,7 @@
                     <a href="#contact">تواصل معنا</a>
                 </nav>
             </div>
-            <div class="logo"><a href="index.html">صوفيا <span>Natural</span></a></div>
+            <div class="logo"><a href="index.html"><img class="logo-img" src="images/logo.png" alt="" width="42" height="42"><span class="logo-text">دار صوفيا</span></a></div>
             <div class="header-actions">
                 <div class="header-search-container">
                     <button type="button" id="searchIconBtn" class="cart-icon-btn" title="بحث" aria-label="بحث"><i class="fa-solid fa-magnifying-glass"></i></button>
@@ -46,15 +50,14 @@
         <div class="container hero-content">
             <div>
                 <h1>عناية طبيعية، ونتيجتها بتبان</h1>
-                <p>منتجات للبشرة والشعر والجسم بمكونات واضحة وتركيبات لطيفة، مصنوعة بحب وبتوصلك لحد باب البيت.</p>
+                <p>منتجات للبشرة والشعر والتجميل بمكونات واضحة وتركيبات لطيفة، مصنوعة بحب وبتوصلك لحد باب البيت.</p>
                 <div class="hero-btns">
                     <a href="#products" class="btn btn-primary">تسوّقي الآن</a>
                     <a href="https://wa.me/" data-wa target="_blank" rel="noopener" class="btn btn-ghost"><i class="fa-brands fa-whatsapp"></i> اسألينا على واتساب</a>
                 </div>
             </div>
             <div class="hero-art" aria-hidden="true">
-                <i class="bottle b1"></i><i class="bottle b2"></i><i class="bottle b3"></i>
-                <img src="images/hero.jpg" alt="" onerror="this.remove()">
+                <img src="images/hero.jpg" alt="دار صوفيا" onerror="this.remove()">
                 <div class="hero-chip"><i class="fa-solid fa-leaf"></i> مكونات طبيعية 100%</div>
             </div>
         </div>
@@ -72,9 +75,9 @@
         <div class="container">
             <div class="section-title"><h2>تسوّقي حسب القسم</h2><p>ابدئي من اللي بتحتاجيه دلوقتي</p></div>
             <div class="cat-tiles">
-                <a href="#products" data-go="skin" class="cat-tile t-skin" style="--img:url('images/logos/skin.jpg')"><h3>البشرة</h3><span>تسوّقي القسم <i class="fa-solid fa-arrow-left"></i></span></a>
+                <a href="#products" data-go="skin" class="cat-tile t-body" style="--img:url('images/logos/body.jpg')"><h3>الجسم</h3><span>تسوّقي القسم <i class="fa-solid fa-arrow-left"></i></span></a>
                 <a href="#products" data-go="hair" class="cat-tile t-hair" style="--img:url('images/logos/hair.jpg')"><h3>الشعر</h3><span>تسوّقي القسم <i class="fa-solid fa-arrow-left"></i></span></a>
-                <a href="#products" data-go="body" class="cat-tile t-body" style="--img:url('images/logos/body.jpg')"><h3>الجسم</h3><span>تسوّقي القسم <i class="fa-solid fa-arrow-left"></i></span></a>
+                <a href="#products" data-go="makeup" class="cat-tile t-skin" style="--img:url('images/logos/makeup.jpeg')"><h3>مستحضرات التجميل</h3><span>تسوّقي القسم <i class="fa-solid fa-arrow-left"></i></span></a>
             </div>
         </div>
     </section>
@@ -85,9 +88,9 @@
                 <div class="section-title"><h2>منتجاتنا</h2></div>
                 <div class="category-boxes-container" id="categoryBoxes">
                     <button type="button" class="big-cat-box active" data-category="all"><i class="fa-solid fa-border-all"></i><h3>الكل</h3></button>
-                    <button type="button" class="big-cat-box" data-category="skin"><i class="fa-solid fa-spa"></i><h3>البشرة</h3></button>
+                    <button type="button" class="big-cat-box" data-category="skin"><i class="fa-solid fa-spa"></i><h3>البشره</h3></button>
                     <button type="button" class="big-cat-box" data-category="hair"><i class="fa-solid fa-seedling"></i><h3>الشعر</h3></button>
-                    <button type="button" class="big-cat-box" data-category="body"><i class="fa-solid fa-hand-holding-heart"></i><h3>الجسم</h3></button>
+                    <button type="button" class="big-cat-box" data-category="makeup"><i class="fa-solid fa-wand-magic-sparkles"></i><h3>التجميل</h3></button>
                 </div>
             </div>
             <div class="products-grid" id="productsGrid"></div>
@@ -97,11 +100,15 @@
 
     <section class="why">
         <div class="container">
-            <h2>عناية بسيطة، بمكونات تعرفيها وتثقي فيها</h2>
+            <div class="why-head">
+                <span class="eyebrow">ليه دار صوفيا؟</span>
+                <h2>عناية بسيطة، بمكونات تعرفيها وتثقي فيها</h2>
+                <p>بنختار كل منتج بعناية، ونكتب لك كل التفاصيل بوضوح، عشان تشتري وانتي مطمنة.</p>
+            </div>
             <div class="why-list">
-                <div><i class="fa-solid fa-flask"></i><div><h4>مكونات واضحة</h4><p>كل منتج مكتوب عليه مكوناته وطريقة استخدامه.</p></div></div>
-                <div><i class="fa-solid fa-heart"></i><div><h4>مصنوعة بحب</h4><p>تركيبات لطيفة بنختارها بعناية لبشرتك وشعرك.</p></div></div>
-                <div><i class="fa-solid fa-headset"></i><div><h4>مساعدة في الاختيار</h4><p>كلمينا ونرشّحلك المنتج المناسب لنوع بشرتك.</p></div></div>
+                <div><span class="why-ico"><i class="fa-solid fa-flask"></i></span><div><h4>مكونات واضحة</h4><p>كل منتج مكتوب عليه مكوناته وطريقة استخدامه.</p></div><span class="why-num">01</span></div>
+                <div><span class="why-ico"><i class="fa-solid fa-heart"></i></span><div><h4>مصنوعة بحب</h4><p>تركيبات لطيفة بنختارها بعناية لبشرتك وشعرك.</p></div><span class="why-num">02</span></div>
+                <div><span class="why-ico"><i class="fa-solid fa-headset"></i></span><div><h4>مساعدة في الاختيار</h4><p>كلمينا ونرشّحلك المنتج المناسب لنوع بشرتك.</p></div><span class="why-num">03</span></div>
             </div>
         </div>
     </section>
@@ -117,12 +124,15 @@
     <footer class="main-footer" id="contact">
         <div class="container footer-grid">
             <div class="footer-col">
+                <img class="footer-logo" src="images/logo.png" alt="دار صوفيا" width="72" height="72">
                 <h3>Sofia Natural</h3>
                 <p>وجهتك لمنتجات العناية الطبيعية المستوحاة من سحر الطبيعة لنشر الجمال والثقة.</p>
                 <div class="social-icons">
-                    <a href="#" aria-label="فيس بوك"><i class="fa-brands fa-facebook-f"></i></a>
-                    <a href="#" aria-label="انستجرام"><i class="fa-brands fa-instagram"></i></a>
-                    <a href="https://wa.me/" data-wa target="_blank" rel="noopener" aria-label="واتساب"><i class="fa-brands fa-whatsapp"></i></a>
+                    <a href="https://www.facebook.com/share/g/1RADwJVfMw/" aria-label="فيس بوك"><i class="fa-brands fa-facebook-f"></i></a>
+                     <a href="https://www.facebook.com/share/183RMHoPpQ/" aria-label="فيس بوك"><i class="fa-brands fa-facebook-f"></i></a>
+                   
+                    
+                    <a href="https://wa.me/ 01102154653" data-wa target="_blank" rel="noopener" aria-label="واتساب"><i class="fa-brands fa-whatsapp"></i></a>
                 </div>
             </div>
             <div class="footer-col">
@@ -140,13 +150,14 @@
         </div>
         <div class="footer-bottom">
             <p>جميع الحقوق محفوظة 2026 Sofia Natural Products</p>
-            <span>تم التطوير بواسطه [Mohammed soudi]</span>
+            <span style="font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">تم التطوير بواسطه [❤Mohammed soudi ]<p style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">{01113105472}</p></span>
+
         </div>
     </footer>
 
     <div id="toast" class="toast" role="status"></div>
-    <script src="products-data.js?v=45"></script>
-    <script src="script.js?v=45"></script>
+    <script src="products-data.js?v=51"></script>
+    <script src="script.js?v=51"></script>
     <script>
         document.querySelectorAll('[data-go]').forEach(a => a.addEventListener('click', () => {
             const tab = document.querySelector('.big-cat-box[data-category="' + a.dataset.go + '"]');
