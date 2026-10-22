@@ -34,8 +34,8 @@ const PRODUCTS = [
     short: "",
     price: 550,
     category: "skin",
-    image: "images/products/skin/Rekah(2).jpeg",
-    images :["images/products/skin/Rekah(2).jpeg","images/products/skin/Rekah(1).jpeg"],
+       image: "images/products/skin/ward(2).jpeg",
+    images: ["", "images/products/skin/Rekah(1).jpeg"],
     details: {
       intro: [
         " مستوحى من لحظة انسياب النعومة على بشرتك، زي نغمة خفيفة تمرّ على الروح. هي تجربة دلال أنثوي ناعم",
@@ -55,8 +55,8 @@ const PRODUCTS = [
     short: "",
     price: 550,
     category: "skin",
-    image: "images/products/skin/ward(1).jpeg",
-    images :["images/products/skin/ward(1).jpeg","images/products/skin/ward(2).jpeg","images/products/skin/ward(3).jpeg",],
+    image: "images/products/skin/ward(3).jpeg",
+    images :["","images/products/skin/Rekah(2).jpeg",],
     
     details: {
       intro: [
