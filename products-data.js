@@ -34,8 +34,8 @@ const PRODUCTS = [
     short: "",
     price: 550,
     category: "skin",
-    image: "images/products/skin/rekah(2).jpeg",
-    images :["images/products/skin/rekah(2).jpeg","images/products/skin/rekah(1).jpeg"],
+    image: "images/products/skin/Rekah(2).jpeg",
+    images :["images/products/skin/Rekah(2).jpeg","images/products/skin/Rekah(1).jpeg"],
     details: {
       intro: [
         " مستوحى من لحظة انسياب النعومة على بشرتك، زي نغمة خفيفة تمرّ على الروح. هي تجربة دلال أنثوي ناعم",
