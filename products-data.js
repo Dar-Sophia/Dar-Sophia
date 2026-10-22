@@ -123,7 +123,7 @@ const PRODUCTS = [
   },
   {
     id: 4,
-    name: "ديودرانت طبيعي",
+    name: "ديودرانت لينا",
     short: "",
     price: 145,
     category: "skin",
