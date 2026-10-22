@@ -14,7 +14,7 @@ const PRODUCTS = [
     id: 1,
     name: "زيت دابر أملا الذهبي",
     short: "300 مل + 100 مل هدية",
-    price: 300,
+    price: 385,
     category: "hair",
     image: "images/products/hair/dabur-amla-oil.jpg",
 
@@ -28,13 +28,57 @@ const PRODUCTS = [
       ]
     }
   },
+   {
+    id: 30,
+    name: "رقراقه (رقه)",
+    short: "",
+    price: 550,
+    category: "skin",
+    image: "images/products/skin/rekah(2).jpeg",
+    images :["images/products/skin/rekah(2).jpeg","images/products/skin/rekah(1).jpeg"],
+    details: {
+      intro: [
+        " مستوحى من لحظة انسياب النعومة على بشرتك، زي نغمة خفيفة تمرّ على الروح. هي تجربة دلال أنثوي ناعم",
+        "توازن بين الترطيب والملمس الخفيف اللي يسيب بشرتك تتنفس وتتلألأ",
+        "زبدة الجسم رقراقة تعبّر عن المرأة اللي تهتم بنفسها👌",
+        "أنوثة راقية،✔️",
+        "وإحساس دائم بالنضارة ✔️",
+        "الانتعاش✔️",
+        "جربيها مرة وهتفضّل معاك دايمًا ✨",
+        "اطلبي رقراقة دلوقتي وجربي بنفسك ✨📦"
+      ]
+    }
+  },
+   {
+    id: 31,
+    name: "رقراقه (ورد)",
+    short: "",
+    price: 550,
+    category: "skin",
+    image: "images/products/skin/ward(1).jpeg",
+    images :["images/products/skin/ward(1).jpeg","images/products/skin/ward(2).jpeg","images/products/skin/ward(3).jpeg",],
+    
+    details: {
+      intro: [
+        " مستوحى من لحظة انسياب النعومة على بشرتك، زي نغمة خفيفة تمرّ على الروح. هي تجربة دلال أنثوي ناعم",
+        "توازن بين الترطيب والملمس الخفيف اللي يسيب بشرتك تتنفس وتتلألأ",
+        "زبدة الجسم رقراقة تعبّر عن المرأة اللي تهتم بنفسها👌",
+        "أنوثة راقية،✔️",
+        "وإحساس دائم بالنضارة ✔️",
+        "الانتعاش✔️",
+        "جربيها مرة وهتفضّل معاك دايمًا ✨",
+        "اطلبي رقراقة دلوقتي وجربي بنفسك ✨📦"
+      ]
+    }
+  },
+  
   {
     id: 2,
     name: "جلافز تقشير الجسم KARINS GLOW",
     short: "",
     price: 500,
     category: "skin",
-    image: "images/products/skin/glovers.jpeg ",
+    image: "images/products/skin/glovers.jpeg",
     
     details: {
       intro: [
@@ -230,12 +274,74 @@ const PRODUCTS = [
   },
   {
     id: 9,
-    name: "الحناء الإندونيسية للأظافر",
+    name: "الحناء الإندونيسية للأظافر(البينك)",
     short: "15 مل",
     price: 285,
     category: "makeup",
     colors: ["نبيتي", "أحمر مارون", "بينك"],
     image: "images/products/makeup/indosy(1).jpeg",
+    images: ["images/products/makeup/indosy(1).jpeg", "images/products/makeup/indosy(2).jpeg", "images/products/makeup/indosy(3).jpeg","images/products/makeup/indosy(4).jpeg"],
+    details: {
+      intro: [
+        "الحنه الأندونيسي",
+        "💅",
+        "الأصلي مش المضروب",
+        "العبوه 15مل بتكفي من 3ل4مرات ،المره الواحده ثبات من شهرين ل3حسب ما الأظافر تطول",
+        "متاح باللون النبيتي♥️",
+        "والاحمر المارون 🍒",
+        "والبينك🩷"
+      ]
+    }
+  },
+   {
+    id: 16,
+    name: "الحناء الإندونيسية للأظافر(احمر )",
+    short: "15 مل",
+    price: 285,
+    category: "makeup",
+    colors: ["نبيتي", "أحمر مارون", "بينك"],
+    image: "images/products/makeup/indosy(2).jpeg",
+    images: ["images/products/makeup/indosy(1).jpeg", "images/products/makeup/indosy(2).jpeg", "images/products/makeup/indosy(3).jpeg","images/products/makeup/indosy(4).jpeg"],
+    details: {
+      intro: [
+        "الحنه الأندونيسي",
+        "💅",
+        "الأصلي مش المضروب",
+        "العبوه 15مل بتكفي من 3ل4مرات ،المره الواحده ثبات من شهرين ل3حسب ما الأظافر تطول",
+        "متاح باللون النبيتي♥️",
+        "والاحمر المارون 🍒",
+        "والبينك🩷"
+      ]
+    }
+  }, {
+    id: 17,
+    name: "الحناء الإندونيسية للأظافر(نبيتي )",
+    short: "15 مل",
+    price: 285,
+    category: "makeup",
+    colors: ["نبيتي", "أحمر مارون", "بينك"],
+    image: "images/products/makeup/indosy(3).jpeg",
+    images: ["images/products/makeup/indosy(1).jpeg", "images/products/makeup/indosy(2).jpeg", "images/products/makeup/indosy(3).jpeg","images/products/makeup/indosy(4).jpeg"],
+    details: {
+      intro: [
+        "الحنه الأندونيسي",
+        "💅",
+        "الأصلي مش المضروب",
+        "العبوه 15مل بتكفي من 3ل4مرات ،المره الواحده ثبات من شهرين ل3حسب ما الأظافر تطول",
+        "متاح باللون النبيتي♥️",
+        "والاحمر المارون 🍒",
+        "والبينك🩷"
+      ]
+    }
+  },
+   {
+    id: 18,
+    name: "الحناء الإندونيسية للأظافر(احمر رومان )",
+    short: "15 مل",
+    price: 285,
+    category: "makeup",
+    colors: ["نبيتي", "أحمر مارون", "بينك"],
+    image: "images/products/makeup/indosy(4).jpeg",
     images: ["images/products/makeup/indosy(1).jpeg", "images/products/makeup/indosy(2).jpeg", "images/products/makeup/indosy(3).jpeg","images/products/makeup/indosy(4).jpeg"],
     details: {
       intro: [

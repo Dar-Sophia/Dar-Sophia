@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>تفاصيل المنتج | Sofia Natural Products</title>
+    <title>تفاصيل المنتج | دار صوفيا</title>
     <link href="https://fonts.googleapis.com/css2?family=Almarai:wght@400;700&family=Readex+Pro:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="style.css?v=51">
+    <link rel="stylesheet" href="style.css?v=53">
 </head>
 <body>
 
@@ -67,8 +67,8 @@
     </main>
 
     <div id="toast" class="toast" role="status"></div>
-    <script src="products-data.js?v=51"></script>
-    <script src="script.js?v=51"></script>
+    <script src="products-data.js?v=53"></script>
+    <script src="script.js?v=53"></script>
     <script>
         const product = findProduct(new URLSearchParams(location.search).get('id'));
         let qty = 1;
@@ -114,7 +114,7 @@
             document.getElementById('productPage').innerHTML =
                 '<div class="pp-notfound"><h2>المنتج غير موجود</h2><p style="margin:10px 0 20px;color:var(--gray)">ارجعي للمتجر واختاري منتج.</p><a href="index.html" class="btn btn-primary">العودة للمتجر</a></div>';
         } else {
-            document.title = product.name + ' | Sofia Natural Products';
+            document.title = product.name + ' | دار صوفيا';
             document.getElementById('bcName').textContent = product.name;
             document.getElementById('ppName').textContent = product.name;
             document.getElementById('ppPrice').textContent = product.price + ' ج.م';
@@ -125,8 +125,24 @@
                 document.getElementById('ppSizeText').textContent = product.short;
                 document.getElementById('ppSize').hidden = false;
             }
-            renderDetails(product.details || { intro: ['منتج طبيعي من Sofia Natural للعناية بجمالك. للاستفسار عن التفاصيل تواصلي معنا على واتساب.'] });
+            renderDetails(product.details || { intro: ['منتج طبيعي من دار صوفيا للعناية بجمالك. للاستفسار عن التفاصيل تواصلي معنا على واتساب.'] });
             updateWa();
+
+            // بيانات منظّمة لجوجل (Product schema) بتتولّد لكل منتج لوحده
+            const abs = u => new URL(String(u).trim(), location.href).href;
+            const ld = document.createElement('script');
+            ld.type = 'application/ld+json';
+            ld.textContent = JSON.stringify({
+                '@context': 'https://schema.org/', '@type': 'Product',
+                name: productLabel(product),
+                image: [product.image, ...(product.images || []), ...(product.gallery || [])].map(abs),
+                description: ((product.details && product.details.intro) || []).slice(0, 3).join(' ').slice(0, 300) || productLabel(product),
+                brand: { '@type': 'Brand', name: 'دار صوفيا' },
+                offers: { '@type': 'Offer', priceCurrency: 'EGP', price: String(product.price), availability: 'https://schema.org/InStock', url: location.href }
+            });
+            document.head.appendChild(ld);
+            const md = document.querySelector('meta[name="description"]') || document.head.appendChild(Object.assign(document.createElement('meta'), { name: 'description' }));
+            md.content = productLabel(product) + ' - ' + product.price + ' ج.م | دار صوفيا، الدفع عند الاستلام وتوصيل لكل المحافظات.';
 
             const related = PRODUCTS.filter(p => p.category === product.category && p.id !== product.id).slice(0, 4);
             if (related.length) {
@@ -135,20 +151,6 @@
             }
         }
     </script>
-    <script type="application/ld+json">
-{
-  "@context": "https://schema.org/",
-  "@type": "Product",
-  "name": "زيت دابر أملا الذهبي",
-  "image": "https://dar-sophia.github.io/Dar-Sophia/images/products/hair/dabur-amla-oil.jpg",
-  "description": "مفيد جدا للشعر الجاف بخلاصة الأملة واللوز والحناء",
-  "offers": {
-    "@type": "Offer",
-    "priceCurrency": "EGP",
-    "price": "300",
-    "availability": "https://schema.org/InStock"
-  }
-}
-</script>
+
 </body>
 </html>

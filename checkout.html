@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>السلة وإتمام الطلب | Sofia Natural</title>
+    <title>السلة وإتمام الطلب | دار صوفيا</title>
     <link href="https://fonts.googleapis.com/css2?family=Almarai:wght@400;700&family=Readex+Pro:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="style.css?v=51">
+    <link rel="stylesheet" href="style.css?v=53">
 </head>
 <body>
 
@@ -52,8 +52,8 @@
     </main>
 
     <div id="toast" class="toast" role="status"></div>
-    <script src="products-data.js?v=51"></script>
-    <script src="script.js?v=51"></script>
+    <script src="products-data.js?v=53"></script>
+    <script src="script.js?v=53"></script>
     <script>
         function renderCheckoutCart() {
             const container = document.getElementById('cartItemsContainer');
@@ -63,7 +63,7 @@
 
             container.innerHTML = cart.length ? cart.map(item => `
                 <div class="co-item">
-                    <img src="${escapeHtml(item.image)}" alt="">
+                    <img src="${escapeHtml(item.image)}" alt="" onerror="${IMG_FALLBACK}">
                     <div class="co-item-info">
                         <h4>${escapeHtml(item.name)}</h4>
                         <span class="co-unit">${item.price} ج.م للقطعة</span>
@@ -101,7 +101,7 @@
             if (!/^(\+?20|0)?1[0125]\d{8}$/.test(phone)) { showToast('رقم الهاتف غير صحيح'); document.getElementById('clientPhone').focus(); return; }
 
             const subtotal = cartSubtotal();
-            let text = `*طلب جديد من متجر Sofia Natural* 🌿\n\n`;
+            let text = `*طلب جديد من متجر دار صوفيا* 🌿\n\n`;
             text += `👤 *الاسم:* ${val('clientName')}\n📞 *الهاتف:* ${phone}\n🏙️ *المحافظة:* ${val('clientCity')}\n📍 *العنوان:* ${val('clientAddress')}\n\n🛍️ *المنتجات المطلوبة:*\n`;
             cart.forEach(i => { text += `- ${i.name} (الكمية: ${i.quantity}) - ${i.price * i.quantity} ج.م\n`; });
             text += `\n🛒 *مجموع المنتجات:* ${subtotal} ج.م\n🚚 *الشحن:* ${SHIPPING} ج.م\n💰 *الإجمالي الكلي:* ${subtotal + SHIPPING} ج.م`;

@@ -1,8 +1,9 @@
 /* ============================================================
-   Sofia Natural — السلة، الوضع الداكن، البحث، عرض المنتجات
+   دار صوفيا — السلة، الوضع الداكن، البحث، عرض المنتجات
    الترتيب في الصفحات: products-data.js ثم script.js
    ============================================================ */
 
+const IMG_FALLBACK = "this.onerror=null;this.src='images/placeholder.svg'";
 const hasCatalog = typeof PRODUCTS !== 'undefined';
 const WHATSAPP_NUMBER = typeof STORE !== 'undefined' ? STORE.whatsapp : '';
 const SHIPPING = typeof STORE !== 'undefined' ? STORE.shipping : 80;
@@ -117,7 +118,7 @@ function createProductCard(p) {
     const cat = (typeof CATEGORIES !== 'undefined' && CATEGORIES[p.category]) ? CATEGORIES[p.category].label : '';
     card.innerHTML = `
         <a href="${link}" class="product-img">
-            <img src="${escapeHtml(p.image)}" alt="${escapeHtml(productLabel(p))}" loading="lazy">
+            <img src="${escapeHtml(p.image)}" alt="${escapeHtml(productLabel(p))}" loading="lazy" onerror="${IMG_FALLBACK}">
             ${cat ? `<span class="tag">${escapeHtml(cat)}</span>` : ''}
         </a>
         <div class="product-info">
@@ -213,54 +214,43 @@ document.addEventListener('DOMContentLoaded', () => {
     initStorePage();
     initReveal();
 });
-// كود واحد شامل لإضافة وتفعيل الصور المتعددة للمنتجات تلقائياً
-(function() {
-    // 1. إضافة تنسيقات CSS تلقائياً للصفحة
-    const style = document.createElement('style');
-    style.innerHTML = `
-        .pp-image { display: flex; flex-direction: column; gap: 12px; }
-        .pp-thumbnails { display: flex; gap: 10px; overflow-x: auto; padding-bottom: 4px; }
-        .thumb-img { width: 70px; height: 70px; object-fit: cover; border-radius: 8px; cursor: pointer; border: 2px solid #ddd; transition: all 0.2s ease; }
-        .thumb-img:hover, .thumb-img.active { border-color: #000; transform: scale(1.05); }
-    `;
-    document.head.appendChild(style);
+// ---------- معرض صور المنتج (صفحة المنتج فقط) ----------
+// بيقرأ product.images (أو product.gallery) ويعرضها كصور مصغرة، والصورة الرئيسية دايمًا product.image
+(function () {
+    const css = document.createElement('style');
+    css.textContent = `
+        .pp-image { display: flex; flex-direction: column; }
+        .pp-thumbnails { display: flex; gap: 10px; overflow-x: auto; padding: 12px; }
+        .thumb-img { flex: 0 0 70px; width: 70px; height: 70px; object-fit: cover; border-radius: 10px; cursor: pointer;
+                     border: 2px solid var(--border-color); background: var(--tint); transition: border-color .2s, transform .2s; }
+        .thumb-img:hover { transform: translateY(-2px); }
+        .thumb-img.active { border-color: var(--primary); }`;
+    document.head.appendChild(css);
 
-    // 2. تفعيل عرض الصور المصغرة والتبديل بينها
     window.addEventListener('DOMContentLoaded', () => {
-        if (typeof product !== 'undefined' && product) {
-            const im = document.getElementById('ppImg');
-            if (!im) return;
-            
-            // إنشاء حاوية الصور المصغرة تلقائياً إذا لم تكن موجودة
-            let thumbContainer = document.getElementById('ppThumbnails');
-            if (!thumbContainer) {
-                thumbContainer = document.createElement('div');
-                thumbContainer.id = 'ppThumbnails';
-                thumbContainer.className = 'pp-thumbnails';
-                im.parentNode.appendChild(thumbContainer);
-            }
-            thumbContainer.innerHTML = '';
+        if (typeof product === 'undefined' || !product) return;
+        const im = document.getElementById('ppImg');
+        if (!im) return;
+        im.onerror = () => { im.onerror = null; im.src = 'images/placeholder.svg'; };
 
-            // جلب الصور (سواء مصفوفة images أو صورة مفردة image)
-            const productImages = product.images && product.images.length > 0 ? product.images : [product.image];
-            im.src = productImages[0];
+        const list = [product.image, ...(product.images || []), ...(product.gallery || [])]
+            .map(x => String(x).trim()).filter((x, i, a) => x && a.indexOf(x) === i);
+        if (list.length < 2) return;
 
-            // إضافة الصور المصغرة إذا كانت أكثر من صورة
-            if (productImages.length > 1) {
-                productImages.forEach((imgSrc, index) => {
-                    const thumb = document.createElement('img');
-                    thumb.src = imgSrc;
-                    thumb.className = index === 0 ? 'thumb-img active' : 'thumb-img';
-                    
-                    thumb.addEventListener('click', () => {
-                        im.src = imgSrc;
-                        document.querySelectorAll('.thumb-img').forEach(t => t.classList.remove('active'));
-                        thumb.classList.add('active');
-                    });
-                    
-                    thumbContainer.appendChild(thumb);
-                });
-            }
-        }
+        const box = document.createElement('div');
+        box.className = 'pp-thumbnails';
+        list.forEach((src, i) => {
+            const t = document.createElement('img');
+            t.src = src; t.alt = ''; t.loading = 'lazy';
+            t.className = 'thumb-img' + (i === 0 ? ' active' : '');
+            t.onerror = () => { t.onerror = null; t.src = 'images/placeholder.svg'; };
+            t.addEventListener('click', () => {
+                im.src = src;
+                box.querySelectorAll('.thumb-img').forEach(x => x.classList.remove('active'));
+                t.classList.add('active');
+            });
+            box.appendChild(t);
+        });
+        im.parentNode.appendChild(box);
     });
 })();
