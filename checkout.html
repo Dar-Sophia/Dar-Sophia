@@ -7,6 +7,19 @@
     <link href="https://fonts.googleapis.com/css2?family=Almarai:wght@400;700&family=Readex+Pro:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css?v=53">
+    <style>
+        .zone-options{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+        .zone-opt{position:relative;display:block;cursor:pointer}
+        .zone-opt input{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:pointer}
+        .zone-box{display:flex;flex-direction:column;gap:4px;height:100%;padding:14px 16px;border:2px solid var(--border-color);border-radius:16px;background:var(--white);transition:border-color .2s,background .2s,box-shadow .2s}
+        .zone-box b{font-size:1rem;color:var(--text-color)}
+        .zone-box small{font-size:.78rem;line-height:1.5;color:var(--gray)}
+        .zone-box em{font-style:normal;font-weight:700;color:var(--primary);margin-top:2px}
+        .zone-opt:hover .zone-box{border-color:var(--primary-light)}
+        .zone-opt input:checked + .zone-box{border-color:var(--primary);background:var(--tint);box-shadow:0 6px 18px -10px var(--primary)}
+        .zone-opt input:focus-visible + .zone-box{outline:2px solid var(--primary);outline-offset:2px}
+        @media (max-width:420px){.zone-options{grid-template-columns:1fr}}
+    </style>
 </head>
 <body>
 
@@ -36,6 +49,14 @@
                         <div class="co-field"><label for="clientPhone">رقم الهاتف (واتساب)</label><input type="tel" id="clientPhone" required autocomplete="tel" placeholder="010xxxxxxxx"></div>
                         <div class="co-field full"><label for="clientCity">المحافظة / المدينة</label><input type="text" id="clientCity" required placeholder="مثال: القاهرة، الجيزة..."></div>
                         <div class="co-field full"><label for="clientAddress">العنوان بالتفصيل</label><textarea id="clientAddress" required rows="3" placeholder="الشارع، رقم العقار، الدور..."></textarea></div>
+                        <div class="co-field full">
+                            <label>منطقة الشحن</label>
+                            <div class="zone-options" role="radiogroup" aria-label="منطقة الشحن">
+                                <label class="zone-opt"><input type="radio" name="shipZone" value="north" required><span class="zone-box"><b>وجه بحري</b><small>القاهرة، الجيزة، الإسكندرية، الدلتا ومدن القناة</small><em data-zone-price="north"></em></span></label>
+                                <label class="zone-opt"><input type="radio" name="shipZone" value="south" required><span class="zone-box"><b>وجه قبلي</b><small>من الفيوم وبني سويف جنوبًا حتى أسوان</small><em data-zone-price="south"></em></span></label>
+                            </div>
+                        </div>
+
                     </form>
                 </div>
             </div>
@@ -55,10 +76,21 @@
     <script src="products-data.js?v=53"></script>
     <script src="script.js?v=53"></script>
     <script>
+        // أسعار الشحن حسب المنطقة (غيّري الأرقام من هنا)
+        const SHIPPING_ZONES = {
+            north: { label: 'وجه بحري', price: 80 },
+            south: { label: 'وجه قبلي', price: 110 }
+        };
+        function currentZone() {
+            const r = document.querySelector('input[name="shipZone"]:checked');
+            return r ? SHIPPING_ZONES[r.value] : null;
+        }
+
         function renderCheckoutCart() {
             const container = document.getElementById('cartItemsContainer');
             const subtotal = cartSubtotal();
-            const shipping = cart.length ? SHIPPING : 0;
+            const zone = currentZone();
+            const shipping = cart.length && zone ? zone.price : 0;
             const count = cart.reduce((s, i) => s + i.quantity, 0);
 
             container.innerHTML = cart.length ? cart.map(item => `
@@ -80,7 +112,7 @@
 
             document.getElementById('itemsCount').textContent = count ? `(${count} منتج)` : '';
             document.getElementById('cartSubtotal').textContent = subtotal + ' ج.م';
-            document.getElementById('cartShipping').textContent = shipping + ' ج.م';
+            document.getElementById('cartShipping').textContent = !cart.length ? '0 ج.م' : (zone ? shipping + ' ج.م' : 'اختاري المنطقة');
             document.getElementById('cartTotalPrice').textContent = (subtotal + shipping) + ' ج.م';
         }
 
@@ -100,16 +132,23 @@
             const phone = val('clientPhone').replace(/[\s-]/g, '');
             if (!/^(\+?20|0)?1[0125]\d{8}$/.test(phone)) { showToast('رقم الهاتف غير صحيح'); document.getElementById('clientPhone').focus(); return; }
 
+            const zone = currentZone();
+            if (!zone) { showToast('اختاري منطقة الشحن (وجه بحري أو قبلي)'); return; }
             const subtotal = cartSubtotal();
+            const shipCost = zone.price;
             let text = `*طلب جديد من متجر دار صوفيا* 🌿\n\n`;
-            text += `👤 *الاسم:* ${val('clientName')}\n📞 *الهاتف:* ${phone}\n🏙️ *المحافظة:* ${val('clientCity')}\n📍 *العنوان:* ${val('clientAddress')}\n\n🛍️ *المنتجات المطلوبة:*\n`;
+            text += `👤 *الاسم:* ${val('clientName')}\n📞 *الهاتف:* ${phone}\n🏙️ *المحافظة:* ${val('clientCity')}\n🚚 *منطقة الشحن:* ${zone.label}\n📍 *العنوان:* ${val('clientAddress')}\n\n🛍️ *المنتجات المطلوبة:*\n`;
             cart.forEach(i => { text += `- ${i.name} (الكمية: ${i.quantity}) - ${i.price * i.quantity} ج.م\n`; });
-            text += `\n🛒 *مجموع المنتجات:* ${subtotal} ج.م\n🚚 *الشحن:* ${SHIPPING} ج.م\n💰 *الإجمالي الكلي:* ${subtotal + SHIPPING} ج.م`;
+            text += `\n🛒 *مجموع المنتجات:* ${subtotal} ج.م\n🚚 *الشحن (${zone.label}):* ${shipCost} ج.م\n💰 *الإجمالي الكلي:* ${subtotal + shipCost} ج.م`;
 
             window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`, '_blank', 'noopener');
         }
 
-        document.addEventListener('DOMContentLoaded', renderCheckoutCart);
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('[data-zone-price]').forEach(el => { el.textContent = SHIPPING_ZONES[el.dataset.zonePrice].price + ' ج.م'; });
+            document.querySelectorAll('input[name="shipZone"]').forEach(r => r.addEventListener('change', renderCheckoutCart));
+            renderCheckoutCart();
+        });
     </script>
 </body>
 </html>
