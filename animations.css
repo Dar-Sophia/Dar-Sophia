@@ -1,0 +1,191 @@
+/* ============================================================
+   دار صوفيا — الحركات والأشكال (النسخة الكاملة)
+   animations.js بيحمّل الملف ده تلقائي، فمحتاجة بس سطر السكريبت
+   ============================================================ */
+
+@keyframes sf-rise { from { opacity: 0; translate: 0 70px; } to { opacity: 1; translate: 0 0; } }
+@keyframes sf-appear { from { opacity: 0; scale: .6; rotate: -6deg; } to { opacity: 1; scale: 1; rotate: 0deg; } }
+@keyframes sf-float { 0%, 100% { translate: 0 0; } 50% { translate: 0 -22px; } }
+@keyframes sf-bob { 0%, 100% { translate: 0 0; } 50% { translate: 0 -12px; } }
+@keyframes sf-spin { to { rotate: 360deg; } }
+@keyframes sf-spin-rev { to { rotate: -360deg; } }
+
+/* ---------- الهيرو ---------- */
+.hero-section { position: relative; overflow: hidden; }
+.hero-section > .container { position: relative; z-index: 1; }
+.hero-content h1 {
+    background: linear-gradient(100deg, var(--text-color) 35%, var(--primary) 50%, var(--text-color) 65%);
+    background-size: 250% 100%; -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+    animation: sf-rise .9s var(--ease) .1s both, sf-text-shine 5s ease-in-out 1.2s infinite;
+}
+@keyframes sf-text-shine { 0%, 100% { background-position: 100% 0; } 50% { background-position: 0 0; } }
+.hero-content p { animation: sf-rise .9s var(--ease) .3s both; }
+.hero-btns { animation: sf-rise .9s var(--ease) .5s both; }
+.hero-art { animation: sf-appear 1s var(--ease) .2s both, sf-float 6s ease-in-out 1.4s infinite; }
+.hero-chip { animation: sf-bob 3.5s ease-in-out 1.2s infinite; }
+.hero-btns .btn-primary { animation: sf-hop 2.8s ease-in-out 2s infinite; }
+@keyframes sf-hop { 0%, 60%, 100% { translate: 0 0; } 70% { translate: 0 -14px; } 80% { translate: 0 0; } 90% { translate: 0 -6px; } }
+
+/* أشكال حوالين صورة الهيرو */
+.sf-blob {
+    position: absolute; inset: -9%; z-index: 0; pointer-events: none; opacity: .55;
+    background: linear-gradient(135deg, var(--primary), var(--primary-light));
+    animation: sf-morph 9s ease-in-out infinite, sf-spin 28s linear infinite; filter: blur(2px);
+}
+@keyframes sf-morph {
+    0%, 100% { border-radius: 58% 42% 55% 45% / 48% 58% 42% 52%; }
+    33% { border-radius: 42% 58% 38% 62% / 58% 40% 60% 42%; }
+    66% { border-radius: 50% 50% 62% 38% / 40% 60% 40% 60%; }
+}
+.sf-ring { position: absolute; inset: -5%; z-index: 0; pointer-events: none; border-radius: 50%;
+    border: 3px dashed var(--primary); animation: sf-spin 22s linear infinite; }
+.sf-ring2 { position: absolute; inset: -15%; z-index: 0; pointer-events: none; border-radius: 50%;
+    border: 2px dotted var(--primary-light); animation: sf-spin-rev 34s linear infinite; }
+.sf-orbit { position: absolute; inset: -5%; z-index: 3; pointer-events: none; animation: sf-spin 9s linear infinite; }
+.sf-orbit i { position: absolute; top: -9px; left: 50%; width: 18px; height: 18px; margin-left: -9px; border-radius: 50%;
+    background: var(--primary); box-shadow: 0 0 0 6px color-mix(in srgb, var(--primary) 30%, transparent), 0 0 22px var(--primary); }
+.sf-orbit.o2 { inset: -15%; animation-duration: 15s; animation-direction: reverse; }
+.sf-orbit.o2 i { width: 12px; height: 12px; margin-left: -6px; top: -6px; background: var(--primary-light); }
+.hero-art > img { position: absolute; z-index: 1; }
+
+/* ---------- جزيئات طايرة (أوراق، نجوم، فقاعات) ---------- */
+.sf-particles { position: absolute; inset: 0; overflow: hidden; pointer-events: none; z-index: 0; }
+.sf-p { position: absolute; bottom: -60px; left: var(--x); font-size: var(--s); line-height: 1; color: var(--c, var(--primary));
+    opacity: 0; animation: sf-rise-up var(--t) linear var(--d) infinite; }
+.sf-p.leaf { animation-name: sf-rise-up, sf-sway; animation-duration: var(--t), 4s; animation-timing-function: linear, ease-in-out;
+    animation-delay: var(--d), var(--d); animation-iteration-count: infinite, infinite; }
+.sf-p.bubble { width: var(--s); height: var(--s); font-size: 0; border-radius: 50%; border: 2px solid var(--c, var(--primary)); background: color-mix(in srgb, var(--c, var(--primary)) 14%, transparent); }
+.sf-p.star { bottom: auto; top: var(--y); animation: sf-twinkle var(--t) ease-in-out var(--d) infinite; }
+@keyframes sf-rise-up { 0% { translate: 0 0; opacity: 0; } 10% { opacity: .85; } 90% { opacity: .85; } 100% { translate: 0 -105vh; opacity: 0; } }
+@keyframes sf-sway { 0%, 100% { rotate: -35deg; margin-left: -18px; } 50% { rotate: 35deg; margin-left: 18px; } }
+@keyframes sf-twinkle { 0%, 100% { opacity: 0; scale: .3; rotate: 0deg; } 50% { opacity: 1; scale: 1.25; rotate: 90deg; } }
+.why .sf-particles, .cta .sf-particles { z-index: 0; }
+.why .sf-p, .why .sf-p.bubble { --c: #fff; }
+.cta { position: relative; overflow: hidden; }
+.cta > .container { position: relative; z-index: 1; }
+
+/* ---------- الأزرار ---------- */
+.btn, .btn-add { position: relative; overflow: hidden; }
+.btn-primary { isolation: isolate; }
+.btn-primary::after { content: ""; position: absolute; top: 0; bottom: 0; width: 45%; left: -60%; z-index: -1;
+    background: linear-gradient(100deg, transparent, rgba(255, 255, 255, .6), transparent); transform: skewX(-20deg);
+    animation: sf-shine 2.6s ease-in-out .8s infinite; }
+@keyframes sf-shine { 0% { left: -60%; } 35%, 100% { left: 140%; } }
+.btn-wa-big { animation: sf-pulse 2.2s ease-out infinite; }
+@keyframes sf-pulse { 0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--wa) 70%, transparent); } 70%, 100% { box-shadow: 0 0 0 26px transparent; } }
+.sf-ripple { position: absolute; border-radius: 50%; pointer-events: none; background: rgba(255, 255, 255, .55); scale: 0; animation: sf-rip .6s ease-out forwards; }
+@keyframes sf-rip { to { scale: 4; opacity: 0; } }
+
+/* ---------- زرار واتساب العايم ---------- */
+.sf-fab { position: fixed; left: 18px; bottom: 18px; z-index: 70; width: 62px; height: 62px; border-radius: 50%;
+    display: grid; place-items: center; color: #fff; background: #25D366; font-size: 32px; text-decoration: none;
+    box-shadow: 0 10px 26px rgba(0, 0, 0, .3); animation: sf-fab-in .8s var(--ease) 1.5s both, sf-bob 2.6s ease-in-out 2.4s infinite; }
+.sf-fab::before, .sf-fab::after { content: ""; position: absolute; inset: 0; border-radius: 50%; border: 3px solid #25D366;
+    animation: sf-wave 2.2s ease-out infinite; }
+.sf-fab::after { animation-delay: 1.1s; }
+@keyframes sf-wave { from { scale: 1; opacity: .8; } to { scale: 2; opacity: 0; } }
+@keyframes sf-fab-in { from { scale: 0; rotate: -180deg; } to { scale: 1; rotate: 0deg; } }
+
+/* ---------- كروت المنتجات ---------- */
+.product-card.sf-pre { opacity: 0; }
+.product-card.sf-in { animation: sf-rise .7s var(--ease) both; animation-delay: var(--sf-d, 0s); }
+.product-card.sf-pop { animation: sf-appear .5s var(--ease) both; animation-delay: var(--sf-d, 0s); }
+.product-card:hover { transform: translateY(-12px) scale(1.03); }
+.product-card:hover .price { animation: sf-bump .6s var(--ease); display: inline-block; }
+.cat-tile:hover { transform: translateY(-12px) scale(1.04) rotate(-1deg); }
+
+/* ---------- ظهور العناصر مع التمرير ---------- */
+.reveal { translate: 0 80px !important; scale: .92;
+    transition: opacity .8s var(--ease), translate .8s var(--ease), scale .8s var(--ease), transform .3s var(--ease), box-shadow .3s var(--ease), border-color .3s, background .3s !important; }
+.reveal.in { translate: 0 0 !important; scale: 1; }
+.cat-tiles .reveal:nth-child(2), .pf-features .reveal:nth-child(2), .why-list .reveal:nth-child(2) { transition-delay: .15s, .15s, .15s; }
+.cat-tiles .reveal:nth-child(3), .pf-features .reveal:nth-child(3), .why-list .reveal:nth-child(3) { transition-delay: .3s, .3s, .3s; }
+.pf-features .reveal:nth-child(4) { transition-delay: .45s, .45s, .45s; }
+.sf-line { display: block; height: 4px; width: 0; margin: 10px 0 0; border-radius: 4px;
+    background: linear-gradient(90deg, var(--primary), var(--primary-light)); transition: width 1s var(--ease) .3s; }
+.section-title.in .sf-line { width: 80px; }
+.why-list > div:hover .why-ico, .pf-item:hover .pf-icon { animation: sf-bob 1s ease-in-out infinite; }
+.pf-icon, .why-ico { animation: sf-wiggle 5s ease-in-out infinite; }
+@keyframes sf-wiggle { 0%, 80%, 100% { rotate: 0deg; } 85% { rotate: -14deg; } 90% { rotate: 12deg; } 95% { rotate: -6deg; } }
+
+/* ---------- السلة ---------- */
+.cart-badge.sf-bump { animation: sf-bump .5s var(--ease); }
+@keyframes sf-bump { 0% { scale: 1; } 40% { scale: 2.2; } 100% { scale: 1; } }
+.cart-icon-btn.sf-shake { animation: sf-shake .6s ease; }
+@keyframes sf-shake { 0%, 100% { rotate: 0deg; } 20% { rotate: -25deg; } 45% { rotate: 20deg; } 70% { rotate: -12deg; } }
+.sf-fly { position: fixed; z-index: 100; pointer-events: none; border-radius: 16px; object-fit: cover; box-shadow: 0 12px 28px rgba(0, 0, 0, .3);
+    transition: transform .8s cubic-bezier(.5, -.2, .6, 1), opacity .8s ease; }
+
+/* ---------- صفحة المنتج ---------- */
+.pp-image > img { animation: sf-appear .7s var(--ease) both; }
+.pp-badges span { animation: sf-rise .6s var(--ease) both; }
+.pp-badges span:nth-child(2) { animation-delay: .1s; }
+.pp-badges span:nth-child(3) { animation-delay: .2s; }
+
+/* ---------- الشريط العلوي المتحرك ---------- */
+.announcement-bar { overflow: hidden !important; padding: 0 !important; }
+.announcement-bar .container { display: block !important; max-width: none !important; padding: 0 !important; }
+.sf-tick { direction: rtl; display: inline-flex; align-items: center; gap: 10px; white-space: nowrap; padding: 11px 34px; font-weight: 700; font-size: .95rem; }
+.sf-tick::after { content: "✦"; margin-inline-start: 34px; opacity: .6; }
+.sf-tick.sf-hot span { background: var(--on-primary); color: var(--primary); padding: 4px 16px; border-radius: 999px; animation: sf-hot 1.2s ease-in-out infinite; display: inline-block; }
+@keyframes sf-hot { 0%, 100% { scale: 1; } 50% { scale: 1.2; } }
+
+/* ---------- شريط التقدّم ---------- */
+.sf-progress { position: fixed; top: 0; right: 0; height: 4px; width: 100%; z-index: 80; pointer-events: none;
+    background: linear-gradient(270deg, var(--primary), var(--primary-light)); transform-origin: right center; transform: scaleX(0); }
+.main-header { transition: box-shadow .3s var(--ease); }
+.main-header.sf-scrolled { box-shadow: 0 10px 30px -18px rgba(0, 0, 0, .35); }
+
+
+/* ============================================================
+   شاشة الترحيب (Splash) + أشكال إضافية
+   ============================================================ */
+.sf-splash { position: fixed; inset: 0; z-index: 9999; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px;
+    background: radial-gradient(circle at 50% 45%, var(--tint), var(--bg-light) 70%); clip-path: circle(150% at 50% 50%);
+    transition: clip-path .9s cubic-bezier(.7, 0, .2, 1); cursor: pointer; overflow: hidden; }
+.sf-splash.sf-out { clip-path: circle(0% at 50% 50%); }
+.sf-s-circles i { position: absolute; left: 50%; top: 50%; width: 160px; height: 160px; margin: -80px 0 0 -80px; border-radius: 50%;
+    border: 2px solid var(--primary); opacity: 0; animation: sf-s-wave 2.4s ease-out infinite; }
+.sf-s-circles i:nth-child(2) { animation-delay: .8s; }
+.sf-s-circles i:nth-child(3) { animation-delay: 1.6s; }
+@keyframes sf-s-wave { 0% { scale: .6; opacity: .8; } 100% { scale: 5; opacity: 0; } }
+.sf-s-logo { position: relative; width: 150px; height: 150px; display: grid; place-items: center; z-index: 1; animation: sf-s-pop 1s var(--ease) both; }
+.sf-s-logo img { width: 96px; height: 96px; object-fit: contain; border-radius: 50%; animation: sf-s-spin 1.4s var(--ease) both; }
+.sf-s-logo svg { position: absolute; inset: 0; width: 100%; height: 100%; rotate: -90deg; }
+.sf-s-ring { fill: none; stroke: var(--primary); stroke-width: 4; stroke-linecap: round; stroke-dasharray: 580; stroke-dashoffset: 580; animation: sf-s-draw 1.6s ease-in-out .2s forwards; }
+@keyframes sf-s-draw { to { stroke-dashoffset: 0; } }
+@keyframes sf-s-pop { from { scale: 0; } to { scale: 1; } }
+@keyframes sf-s-spin { from { rotate: -270deg; opacity: 0; } to { rotate: 0deg; opacity: 1; } }
+.sf-s-name { display: flex; gap: 14px; z-index: 1; font-size: clamp(2rem, 7vw, 3.2rem); font-weight: 700; color: var(--primary); }
+.sf-s-name span { display: inline-block; opacity: 0; animation: sf-rise .8s var(--ease) both; }
+.sf-s-name span:nth-child(1) { animation-delay: 1s; }
+.sf-s-name span:nth-child(2) { animation-delay: 1.25s; }
+.sf-s-tag { z-index: 1; color: var(--gray); letter-spacing: .04em; opacity: 0; animation: sf-rise .8s var(--ease) 1.6s both; }
+.sf-wait .hero-content h1, .sf-wait .hero-content p, .sf-wait .hero-btns, .sf-wait .hero-art, .sf-wait .hero-chip { animation-play-state: paused !important; }
+
+/* ---------- موجات بين الأقسام ---------- */
+.why { position: relative; }
+.sf-wave { position: absolute; left: 0; width: 200%; height: 54px; z-index: 1; pointer-events: none; animation: sf-wave-move 12s linear infinite; }
+.sf-wave.top { top: -1px; } .sf-wave.bottom { bottom: -1px; rotate: 180deg; animation-direction: reverse; }
+.sf-wave path { fill: var(--bg-light); }
+@keyframes sf-wave-move { to { translate: -50% 0; } }
+
+/* ---------- أشكال عايمة في خلفية الأقسام ---------- */
+.cats-section, .products-section { position: relative; overflow: hidden; }
+.cats-section > .container, .products-section > .container { position: relative; z-index: 1; }
+.sf-shape { position: absolute; pointer-events: none; z-index: 0; }
+.sf-shape.blob { width: var(--w); height: var(--w); background: radial-gradient(circle at 30% 30%, var(--primary-light), var(--primary)); opacity: .22; filter: blur(3px);
+    animation: sf-morph 11s ease-in-out infinite, sf-drift var(--t, 14s) ease-in-out infinite; }
+.sf-shape.ring { width: var(--w); height: var(--w); border-radius: 50%; border: 3px dashed var(--primary); opacity: .35; animation: sf-spin 26s linear infinite, sf-drift 16s ease-in-out infinite; }
+.sf-shape.dots { width: 150px; height: 150px; opacity: .5; background-image: radial-gradient(var(--primary) 2.5px, transparent 3px); background-size: 20px 20px; animation: sf-drift 12s ease-in-out infinite; }
+.sf-shape.diamond { width: var(--w); height: var(--w); border: 3px solid var(--primary); opacity: .4; rotate: 45deg; animation: sf-diamond 9s ease-in-out infinite; }
+@keyframes sf-drift { 0%, 100% { translate: 0 0; } 50% { translate: 36px -42px; } }
+@keyframes sf-diamond { 0%, 100% { rotate: 45deg; scale: 1; } 50% { rotate: 225deg; scale: 1.5; } }
+
+/* ---------- ختم دوّار على الهيرو ---------- */
+.sf-badge { position: absolute; top: -4%; right: -6%; width: 120px; height: 120px; z-index: 4; display: grid; place-items: center; border-radius: 50%;
+    background: var(--primary); color: var(--on-primary); box-shadow: 0 14px 30px -10px rgba(0, 0, 0, .4); animation: sf-bob 3s ease-in-out infinite; }
+.sf-badge svg { position: absolute; inset: 0; width: 100%; height: 100%; animation: sf-spin 14s linear infinite; }
+.sf-badge text { fill: currentColor; font-size: 12.5px; font-weight: 700; letter-spacing: 2.2px; font-family: sans-serif; }
+.sf-badge i { font-size: 30px; animation: sf-hot 1.8s ease-in-out infinite; }
+@media (max-width: 760px) { .sf-badge { width: 84px; height: 84px; } .sf-badge i { font-size: 22px; } .sf-badge text { font-size: 14px; } }
